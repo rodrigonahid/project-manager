@@ -8,51 +8,40 @@
   <link rel="stylesheet" href="/styles/tailwind.css">
 </head>
 <body class="bg-gray-200">
-  <header class="relative bg-blue-500 shadow p-4">
-    <div class="container mx-auto max-w-5xl flex justify-center">
-      <a href="/" class="flex items-center">
-        <img src="/img/calculator.png" alt="calculator" width="44"/>
-        <span class="ml-4 text-white text-3xl font-bold sm:block">Project Manager</span>
-      </a>
-    </div>
-  </header>
-  <div class="title">
-    <div class="bg-blue-400 p-4">
-      <div class="container mx-auto max-w-5xl flex justify-center">
-        <h1 class="text-white text-2xl font-semibold mt-8 mb-16">Adicionar novo projeto</h1>
+ 
+  <%- include('components/header', {title: "Projeto"})  %> 
+  
+  <form id="project-form" method="post">
+    <div class="container mx-auto flex flex-col lg:flex-row lg:justify-around">
+      <div class="flex-1 mx-4">
+        <div class="relative -top-24 m-4 lg:-top-24">
+          <h2 class="text-gray-500 text-2xl font-semibold border-b-2 border-gray-300 pb-2 mb-6">Dados do projeto</h2>
+          <label class="xl:mx-2 inline-block w-2/5" for="">
+            <span>Nome do projeto</span>
+            <input class="w-full my-4 py-2 px-4 rounded border border-gray-300" type="text">
+          </label>
+          <label class="mx-2 inline-block w-2/5 " for="">
+            <span>Horas por dia</span>
+            <input class="w-full my-4 py-2 px-4 rounded border border-gray-300" type="text">
+          </label>
+          <label class="xl:mx-2 inline-block  w-2/5" for="">
+            <span>Estimativa de horas</span>
+            <input class="w-full my-4 py-2 px-4 rounded border border-gray-300" type="text">
+          </label>
+        </div>
+      </div>
+      <div class="card flex flex-col items-center relative -top-16  flex-1 mx-4 max-w-md h-full bg-white p-12 rounded-md shadow-lg ">
+        <img class="w-52" src="/img/cash-gray.svg" alt="cash">
+        <h2 class="text-gray-800 text-2xl font-bold tracking-wide mt-4 mb-8">Preencha o formulário.</h2>
+        <div class="flex w-full">
+          <button class="bg-pink-500 w-full text-center p-4 mx-2 rounded text-white font-semibold text-lg hover:bg-pink-400 transition">Salvar</button>
+          <a href="#" class="p-5 bg-gray-200 rounded mx-2 hover:bg-gray-100 transition">
+            <img src="/img/trash.svg" alt="delete">
+          </a>
+        </div>
       </div>
     </div>
-    <div style="height: 150px; overflow: hidden;" ><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M-204.57,-44.88 C139.10,111.03 271.49,-49.98 698.36,59.72 L500.00,0.00 L0.00,0.00 Z" style="stroke: none; fill: #60a5fa;"></path></svg></div>
-  </div>
-  <div class="container mx-auto flex flex-col lg:flex-row lg:justify-around">
-    <div class="flex-1 mx-4">
-      <div class="relative -top-24 m-4 lg:-top-24">
-        <h2 class="text-gray-500 text-2xl font-semibold border-b-2 border-gray-300 pb-2 mb-6">Dados do projeto</h2>
-        <label class="xl:mx-2 inline-block w-2/5" for="">
-          <span>Nome do projeto</span>
-          <input class="w-full my-4 py-2 px-4 rounded border border-gray-300" type="text">
-        </label>
-        <label class="mx-2 inline-block w-2/5 " for="">
-          <span>Horas por dia</span>
-          <input class="w-full my-4 py-2 px-4 rounded border border-gray-300" type="text">
-        </label>
-        <label class="xl:mx-2 inline-block  w-2/5" for="">
-          <span>Estimativa de horas</span>
-          <input class="w-full my-4 py-2 px-4 rounded border border-gray-300" type="text">
-        </label>
-      </div>
-    </div>
-    <div class="card flex flex-col items-center relative -top-16  flex-1 mx-4 max-w-md h-full bg-white p-12 rounded-md shadow-lg ">
-      <img class="w-52" src="/img/cash-gray.svg" alt="cash">
-      <h2 class="text-gray-800 text-2xl font-bold tracking-wide mt-4 mb-8">Preencha o formulário.</h2>
-      <div class="flex w-full">
-        <a href="#" class="bg-pink-500 w-full text-center p-4 mx-2 rounded text-white font-semibold text-lg hover:bg-pink-400 transition">Salvar</a>
-        <a href="#" class="p-5 bg-gray-200 rounded mx-2 hover:bg-gray-100 transition">
-          <img src="/img/trash.svg" alt="delete">
-        </a>
-      </div>
-    </div>
-  </div>
+  </form>
 
 </body>
 <script src="src/scripts/toggle.js"></script>

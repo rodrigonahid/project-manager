@@ -1,26 +1,24 @@
 const express = require('express');
 const routes = express.Router();
 
-const basePath = __dirname + '/views'
+const views = __dirname + '/views/';
 
-routes.get('/',(req, res) => {
-  return res.sendFile(`${basePath}/index.html`)
-})
+const profile = {
+  name: "Rodrigo Nahid",
+  avatar: "https://github.com/rodrigonahid.png",
+  "monthly-budget": 3000,
+  "days-per-week": 5,
+  "hours-per-day": 6,
+  "vacation-per-year": 4
+}
 
-routes.get('/index.html', (req, res)=>{
-  return res.redirect('/')
-})
+routes.get('/', (req, res) => res.render(views + 'index'))
 
-routes.get('/project',(req, res) => {
-  return res.sendFile(`${basePath}/project.html`)
-})
+routes.get('/project', (req, res) => res.render(views + 'project'))
+routes.post('/project', (req, res) => {res.render(views + 'project'), console.log(req)})
 
-routes.get('/project/edit',(req, res) => {
-  return res.sendFile(`${basePath}/project.html`)
-})
+routes.get('/project/edit', (req, res) =>  res.render(views + 'project'))
 
-routes.get('/profile',(req, res) => {
-  return res.sendFile(`${basePath}/profile.html`)
-})
+routes.get('/profile', (req, res) =>  res.render(views + 'profile', {profile: profile}))
 
 module.exports = routes;
