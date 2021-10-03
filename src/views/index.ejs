@@ -5,28 +5,30 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projects Management</title>
-  <link rel="stylesheet" href="tailwind.css">
+  <link rel="stylesheet" href="/styles/tailwind.css">
 </head>
 <body class="bg-gray-200">
   <header class="relative bg-blue-500 shadow p-4">
     <div class="container mx-auto max-w-5xl flex justify-between">
-      <a href="#" class="flex items-center">
-        <img src="src/img/calculator.png" alt="calculator" width="44"/>
+      <a href="/" class="flex items-center">
+        <img src="/img/calculator.png" alt="calculator" width="44"/>
         <span class="hidden ml-4 text-white text-3xl font-bold sm:block">Project Manager</span>
       </a>
       <div class="flex items-center">
         <div class="mr-2 text-right">
           <p class="text-white font-bold">Rodrigo Nahid</p>
-          <a class="text-gray-400 hover:text-gray-500" href="#">Ver perfil</a>
+          <a class="text-gray-400 hover:text-gray-500" href="/profile">Ver perfil</a>
         </div>
-        <img class="rounded-full border-pink-600 border-2" src="https://avatars.githubusercontent.com/u/69832627?v=4" alt="profile" width="60">
+        <a href="/profile">
+          <img class="rounded-full border-pink-600 border-2" src="https://avatars.githubusercontent.com/u/69832627?v=4" alt="profile" width="60">
+        </a>
       </div>
     </div>
   </header>
   <div class="projeto">
     <div class="bg-blue-400 p-4">
       <div class="container mx-auto max-w-5xl flex justify-center">
-        <img src="src/img/alert.svg">
+        <img src="/img/alert.svg">
         <span class="text-white font-semibold ml-2">Você tem 2 horas livres hoje!</span>
       </div>
     </div>
@@ -36,7 +38,7 @@
         <p class="text-white font-bold">7 <span class="block text-gray-300 font-normal md:inline md:ml-2">Em andamento</span></p>
         <p class="text-white font-bold">12 <span class="block text-gray-300 font-normal md:inline md:ml-2">Encerrados</span></p>
         <a href="#" class="fixed z-50 bottom-5 right-5 bg-pink-500 p-4 rounded-full shadow-lg lg:static lg:rounded-md lg:flex lg:items-center transition lg:hover:bg-pink-400">
-          <img src="src/img/plus.svg" alt="plus">
+          <img src="/img/plus.svg" alt="plus">
           <span class="hidden text-lg text-white ml-2 lg:block">Adicionar novo projeto</span>
         </a>
       </div>
@@ -78,11 +80,11 @@
           </div>
           <div class="action p-4 pb-0 flex lg:p-4">
             <a href="#" class="edit border border-gray-300 flex items-center justify-center p-2 rounded mx-3 w-1/2 shadow transition lg:w-auto lg:hover:bg-gray-100 lg:hover:shadow-lg">
-              <img class="mr-2" src="src/img/edit.svg" alt="edit">
+              <img class="mr-2" src="/img/edit.svg" alt="edit">
               <span class="text-gray-600 font-semibold">Edit</span>
             </a href="#">
             <a href="#" class="delete border border-gray-300 flex items-center justify-center p-2 rounded mx-3 w-1/2 shadow transition lg:w-auto lg:hover:bg-gray-100 lg:hover:shadow-lg">
-              <img class="mr-2" src="src/img/delete.svg" alt="delete">
+              <img class="mr-2" src="/img/delete.svg" alt="delete">
               <span class="text-gray-600 font-semibold">Delete</span>
             </a href="#">
           </div>
