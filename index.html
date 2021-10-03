@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects Management</title>
+  <link rel="stylesheet" href="tailwind.css">
+</head>
+<body class="bg-gray-200">
+  <header class="relative bg-blue-500 shadow p-4">
+    <div class="container mx-auto max-w-5xl flex justify-between">
+      <a href="#" class="flex items-center">
+        <img src="src/img/calculator.png" alt="calculator" width="44"/>
+        <span class="hidden ml-4 text-white text-3xl font-bold sm:block">Project Manager</span>
+      </a>
+      <div class="flex items-center">
+        <div class="mr-2 text-right">
+          <p class="text-white font-bold">Rodrigo Nahid</p>
+          <a class="text-gray-400 hover:text-gray-500" href="#">Ver perfil</a>
+        </div>
+        <img class="rounded-full border-pink-600 border-2" src="https://avatars.githubusercontent.com/u/69832627?v=4" alt="profile" width="60">
+      </div>
+    </div>
+  </header>
+  <div class="projeto">
+    <div class="bg-blue-400 p-4">
+      <div class="container mx-auto max-w-5xl flex justify-center">
+        <img src="src/img/alert.svg">
+        <span class="text-white font-semibold ml-2">Você tem 2 horas livres hoje!</span>
+      </div>
+    </div>
+    <div class="bg-blue-400 px-4">
+      <div class="container mx-auto max-w-5xl flex justify-between items-center md:justify-around">
+        <p class="text-white font-bold">12 <span class="block text-gray-300 font-normal md:inline md:ml-2">Projetos</span></p>
+        <p class="text-white font-bold">7 <span class="block text-gray-300 font-normal md:inline md:ml-2">Em andamento</span></p>
+        <p class="text-white font-bold">12 <span class="block text-gray-300 font-normal md:inline md:ml-2">Encerrados</span></p>
+        <a href="#" class="fixed z-50 bottom-5 right-5 bg-pink-500 p-4 rounded-full shadow-lg lg:static lg:rounded-md lg:flex lg:items-center transition lg:hover:bg-pink-400">
+          <img src="src/img/plus.svg" alt="plus">
+          <span class="hidden text-lg text-white ml-2 lg:block">Adicionar novo projeto</span>
+        </a>
+      </div>
+    </div>
+    <div style="height: 150px; overflow: hidden;" ><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M-204.57,-44.88 C139.10,111.03 271.49,-49.98 698.36,59.72 L500.00,0.00 L0.00,0.00 Z" style="stroke: none; fill: #60a5fa;"></path></svg></div>
+  </div>
+  <section class="relative -top-32">
+    <div class="container mx-auto max-w-5xl">
+      <div class="bg-white m-2 px-2 py-4 rounded border border-gray-300 shadow lg:flex lg:justify-between">
+        <div class="flex justify-between">
+          <div class="flex items-center">
+            <span class="mr-2 text-sm text-gray-400 font-semibold lg:text-lg lg:m-4">1</span>
+            <h2 class="text-gray-700 text-md font-semibold lg:mr-4">Pizzaria Guloso</h2>
+          </div>
+          <div class="flex items-center">
+            <div class="flex items-center px-2 bg-green-300 text-green-600 text-xs font-bold rounded-full lg:px-4 lg:py-2 lg:text-sm">
+              Em andamento
+            </div>
+          </div>
+          
+          <div class="flex items-center lg:hidden">
+            <span id="toggle-button" class="bg-gray-300 text-gray-700 font-bold flex items-center justify-center w-8 h-8 rounded transform -rotate-90">
+              <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 15L1 8L8 1" stroke="#BFBFCC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg> 
+            </span>
+          </div>
+        </div>
+        <div id="toggle" class="lg:flex lg:justify-between lg:w-2/3">
+          <div class="flex justify-between p-4 pb-0 lg:p-4">
+            <div class="lg:flex items-center lg:mr-4">
+              <span class="uppercase text-xs text-gray-400 leading-3 lg:mr-2">Valor</span>
+              <p class="text-gray-700 font-medium">R$ 4500,00</p>
+            </div>
+            <div class="lg:flex items-center lg:mr-4">
+              <span class="uppercase text-xs text-gray-400 leading-3 lg:mr-2">Prazo</span>
+              <p class="text-gray-700 font-medium">3 dias para a entrega</p>
+            </div>
+          </div>
+          <div class="action p-4 pb-0 flex lg:p-4">
+            <a href="#" class="edit border border-gray-300 flex items-center justify-center p-2 rounded mx-3 w-1/2 shadow transition lg:w-auto lg:hover:bg-gray-100 lg:hover:shadow-lg">
+              <img class="mr-2" src="src/img/edit.svg" alt="edit">
+              <span class="text-gray-600 font-semibold">Edit</span>
+            </a href="#">
+            <a href="#" class="delete border border-gray-300 flex items-center justify-center p-2 rounded mx-3 w-1/2 shadow transition lg:w-auto lg:hover:bg-gray-100 lg:hover:shadow-lg">
+              <img class="mr-2" src="src/img/delete.svg" alt="delete">
+              <span class="text-gray-600 font-semibold">Delete</span>
+            </a href="#">
+          </div>
+        </div>
+      </div>
+  
+     
+    </div>
+  </section>
+</body>
+<script src="src/scripts/toggle.js"></script>
+</html>
