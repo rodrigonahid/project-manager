@@ -18,15 +18,15 @@
           <h2 class="text-gray-500 text-2xl font-semibold border-b-2 border-gray-300 pb-2 mb-6">Dados do projeto</h2>
           <label class="xl:mx-2 inline-block w-2/5" for="">
             <span>Nome do projeto</span>
-            <input class="w-full my-4 py-2 px-4 rounded border border-gray-300" type="text">
+            <input id="project-name" name="project-name" class="w-full my-4 py-2 px-4 rounded border border-gray-300" type="text">
           </label>
           <label class="mx-2 inline-block w-2/5 " for="">
             <span>Horas por dia</span>
-            <input class="w-full my-4 py-2 px-4 rounded border border-gray-300" type="text">
+            <input id="daily-hours" name="daily-hours" class="w-full my-4 py-2 px-4 rounded border border-gray-300" type="text">
           </label>
           <label class="xl:mx-2 inline-block  w-2/5" for="">
             <span>Estimativa de horas</span>
-            <input class="w-full my-4 py-2 px-4 rounded border border-gray-300" type="text">
+            <input id="project-valuation" name="project-valuation" class="w-full my-4 py-2 px-4 rounded border border-gray-300" type="text">
           </label>
         </div>
       </div>
@@ -34,7 +34,7 @@
         <img class="w-52" src="/img/cash-gray.svg" alt="cash">
         <h2 class="text-gray-800 text-2xl font-bold tracking-wide mt-4 mb-8">Preencha o formulário.</h2>
         <div class="flex w-full">
-          <button class="bg-pink-500 w-full text-center p-4 mx-2 rounded text-white font-semibold text-lg hover:bg-pink-400 transition">Salvar</button>
+          <button form="project-form" type="submit" class="bg-pink-500 w-full text-center p-4 mx-2 rounded text-white font-semibold text-lg hover:bg-pink-400 transition">Salvar</button>
           <a href="#" class="p-5 bg-gray-200 rounded mx-2 hover:bg-gray-100 transition">
             <img src="/img/trash.svg" alt="delete">
           </a>
