@@ -19,6 +19,9 @@ const project = [
     daily_hours: "2",
     total_hours: "60",
     created_at: Date.now(),
+    budget: 4500,
+    remaining: 3,
+    status: "progress",
   },
   {
     id: 2,
@@ -26,10 +29,23 @@ const project = [
     daily_hours: "6",
     total_hours: "80",
     created_at: Date.now(),
+    budget: 4500,
+    remaining: 3,
+    status: "done",
   },
 ];
 
-routes.get("/", (req, res) => res.render(views + "index", { project }));
+routes.get("/", (req, res) => {
+  // Ajustes no projeto
+  const updatedJobs = project.map((job) => {
+    const remainingDays = (job.total_hours / job.daily_hours).toFixed();
+    job.remainingDays = remainingDays;
+    console.log(job);
+    return job;
+  });
+
+  return res.render(views + "index", { project });
+});
 
 routes.get("/project", (req, res) => res.render(views + "project"));
 routes.post("/project", (req, res) => {

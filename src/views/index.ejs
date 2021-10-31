@@ -48,7 +48,7 @@
   <section class="relative -top-32">
     <div class="container mx-auto max-w-5xl">
       <% project.forEach(element => { %>
-        <div class="bg-white m-2 px-2 py-4 rounded border border-gray-300 shadow lg:flex lg:justify-between">
+        <div class="bg-white m-2 px-2 py-4 rounded border border-gray-300 shadow lg:flex lg:justify-between" data-id="<%= element.id %>">
         <div class="flex justify-between">
           <div class="flex items-center">
             <span class="mr-2 text-sm text-gray-400 font-semibold lg:text-lg lg:m-4"><%= element.id %></span>
@@ -93,9 +93,8 @@
       </div>
       <% }); %>
   
-     
     </div>
   </section>
 </body>
-<script src="src/scripts/toggle.js"></script>
+<script src="/scripts/toggle.js"></script>
 </html>
