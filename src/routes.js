@@ -66,6 +66,7 @@ const Job = {
       const updatedJobs = Job.data.map((job) => {
         job.remainingDays = Job.services.remainingDays(job);
         job.status = job.remainingDays <= 0 ? "done" : "progress";
+        job.budget = Job.services.calculateBudget(job, Profile.data.value_hour);
         return job;
       });
 
@@ -97,8 +98,32 @@ const Job = {
       if (!job) {
         return res.send("Project not found");
       }
-
+      job.budget = Job.services.calculateBudget(job, Profile.data.value_hour);
       return res.render(views + "project-edit", { job });
+    },
+    update(req, res) {
+      const jobId = req.params.id;
+
+      const job = Job.data.find((job) => Number(job.id) === Number(jobId));
+
+      if (!job) {
+        return res.send("Project not found");
+      }
+      const updatedJob = {
+        ...job,
+        name: req.body.project_name,
+        total_hours: req.body["total-hours"],
+        daily_hours: req.body["daily-hours"],
+      };
+
+      Job.data = Job.data.map((job) => {
+        if (Number(job.id) === Number(jobId)) {
+          job = updatedJob;
+        }
+
+        return job;
+      });
+      res.redirect("/job/" + jobId);
     },
   },
   services: {
@@ -115,6 +140,9 @@ const Job = {
       const dayInMs = 1000 * 60 * 60 * 24;
       const dayDiff = Math.floor(timeDiffInMs / dayInMs);
       return dayDiff;
+    },
+    calculateBudget(job, valueHour) {
+      valueHour * job.total_hours;
     },
   },
 };

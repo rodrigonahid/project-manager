@@ -10,7 +10,7 @@
   <body class="bg-gray-200">
     <%- include('components/header', {title: "Projeto"}) %>
 
-    <form id="project-form" method="post">
+    <form id="project-form" method="post" action="/job/<%= job.id %> ">
       <div
         class="container mx-auto flex flex-col lg:flex-row lg:justify-around"
       >
@@ -34,7 +34,7 @@
                 name="project-name"
                 class="w-full my-4 py-2 px-4 rounded border border-gray-300"
                 type="text"
-                value="<%= job.name %> "
+                value="<%= job.project_name %> "
               />
             </label>
             <label class="mx-2 inline-block w-2/5" for="">
@@ -44,6 +44,7 @@
                 name="daily-hours"
                 class="w-full my-4 py-2 px-4 rounded border border-gray-300"
                 type="text"
+                value="<%= job.daily_hours %> "
               />
             </label>
             <label class="xl:mx-2 inline-block w-2/5" for="">
@@ -53,6 +54,7 @@
                 name="project-valuation"
                 class="w-full my-4 py-2 px-4 rounded border border-gray-300"
                 type="text"
+                value="<%= job.total_hours %> "
               />
             </label>
           </div>
@@ -75,8 +77,17 @@
           "
         >
           <img class="w-52" src="/img/cash-gray.svg" alt="cash" />
-          <h2 class="text-gray-800 text-2xl font-bold tracking-wide mt-4 mb-8">
-            Preencha o formulário.
+          <h2
+            class="
+              text-gray-800 text-center text-2xl
+              font-bold
+              tracking-wide
+              mt-4
+              mb-8
+            "
+          >
+            O valor do projeto ficou em <br />
+            R$ <%= job.budget %>
           </h2>
           <div class="flex w-full">
             <button
