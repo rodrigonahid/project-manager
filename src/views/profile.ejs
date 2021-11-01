@@ -1,59 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Projects Management</title>
-  <link rel="stylesheet" href="/styles/tailwind.css">
-</head>
-<body class="bg-gray-200">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projects Management</title>
+    <link rel="stylesheet" href="/styles/tailwind.css" />
+  </head>
+  <body class="bg-gray-200">
+    <%- include('components/header', {title: "Meu perfil"}) %>
 
-  <%- include('components/header', {title: "Meu perfil"})  %> 
-
-  <div class="container mx-auto flex flex-col lg:flex-row lg:justify-around">
-    <div class="card flex flex-col items-center relative -top-52 flex-1 mx-4 max-w-md h-full lg:bg-white lg:p-8 lg:rounded-md lg:shadow-lg lg:-top-48">
-      <img class="w-52 rounded-full border-4 border-pink-500" src="<%= profile.avatar %> " alt="profile pic">
-      <h2 class="text-gray-800 text-2xl font-bold tracking-wide mt-4 mb-8"><%= profile.name %> </h2>
-      <p class="text-gray-500 text-lg mb-4">O valor da sua hora é de <span class="text-gray-700 font-semibold">R$ 75,00</span>.</p>
-    </div>
-    <div class="flex-1 mx-4">
-      <div class="relative -top-36 m-4 lg:-top-24">
-        <h2 class="text-gray-500 text-2xl font-semibold border-b-2 border-gray-300 pb-2 mb-6">Dados do perfil</h2>
-        <div class="lg:flex lg:-mx-2">
-          <input name="name" id="name" value="<%= profile.name %>" class="w-full my-4 py-2 px-4 rounded border border-gray-300 lg:mx-2" type="text" placeholder="Nome">
-          <input name="avatar" id="avatar" value="<%= profile.avatar %> " class="w-full my-4 py-2 px-4 rounded border border-gray-300 lg:mx-2" type="text" placeholder="Link da foto">
+    <div class="container mx-auto flex flex-col lg:flex-row lg:justify-around">
+      <div
+        class="
+          card
+          flex flex-col
+          items-center
+          relative
+          -top-52
+          flex-1
+          mx-4
+          max-w-md
+          h-full
+          lg:bg-white lg:p-8 lg:rounded-md lg:shadow-lg lg:-top-48
+        "
+      >
+        <img
+          class="w-52 rounded-full border-4 border-pink-500"
+          src="<%= profile.avatar %> "
+          alt="profile pic"
+        />
+        <h2 class="text-gray-800 text-2xl font-bold tracking-wide mt-4 mb-8">
+          <%= profile.name %>
+        </h2>
+        <p class="text-gray-500 text-lg mb-4">
+          O valor da sua hora é de
+          <span class="text-gray-700 font-semibold"
+            >R$ <%= profile.budget %> </span
+          >.
+        </p>
+      </div>
+      <div class="flex-1 mx-4">
+        <div class="relative -top-36 m-4 lg:-top-24">
+          <h2
+            class="
+              text-gray-500 text-2xl
+              font-semibold
+              border-b-2 border-gray-300
+              pb-2
+              mb-6
+            "
+          >
+            Dados do perfil
+          </h2>
+          <div class="lg:flex lg:-mx-2">
+            <input
+              name="name"
+              id="name"
+              value="<%= profile.name %>"
+              class="
+                w-full
+                my-4
+                py-2
+                px-4
+                rounded
+                border border-gray-300
+                lg:mx-2
+              "
+              type="text"
+              placeholder="Nome"
+            />
+            <input
+              name="avatar"
+              id="avatar"
+              value="<%= profile.avatar %> "
+              class="
+                w-full
+                my-4
+                py-2
+                px-4
+                rounded
+                border border-gray-300
+                lg:mx-2
+              "
+              type="text"
+              placeholder="Link da foto"
+            />
+          </div>
+        </div>
+        <div class="relative -top-36 m-4 lg:-top-24">
+          <h2
+            class="
+              text-gray-500 text-2xl
+              font-semibold
+              border-b-2 border-gray-300
+              pb-2
+              mt-12
+              mb-6
+            "
+          >
+            Planejamento
+          </h2>
+          <div class="xl:-mx-2">
+            <div class="xl:flex">
+              <label class="xl:mx-2" for="">
+                <span>Quanto eu quero ganhar por mês?</span>
+                <input
+                  name="monthly-budget"
+                  id="monthly-budget"
+                  value="<%= profile.monthly_budget %> "
+                  class="w-full my-4 py-2 px-4 rounded border border-gray-300"
+                  type="text"
+                  placeholder="Nome"
+                />
+              </label>
+              <label class="xl:mx-2" for="">
+                <span>Quantas horas quero trabalhar por dia?</span>
+                <input
+                  name="hours-per-day"
+                  id="hours-per-day"
+                  value="<%= profile.hours_per_day %> "
+                  class="w-full my-4 py-2 px-4 rounded border border-gray-300"
+                  type="text"
+                  placeholder="Nome"
+                />
+              </label>
+            </div>
+            <div class="xl:flex">
+              <label class="xl:mx-2" for="">
+                <span>Quantos dias quero trabalhar por semana?</span>
+                <input
+                  name="days-per-week"
+                  id="days-per-week"
+                  value="<%= profile.days_per_week %> "
+                  class="w-full my-4 py-2 px-4 rounded border border-gray-300"
+                  type="text"
+                  placeholder="Nome"
+                />
+              </label>
+              <label class="xl:mx-2" for="">
+                <span>Quantas semanas por ano quero tirar férias?</span>
+                <input
+                  name="vacation-per-year"
+                  id="vacation-per-year"
+                  value="<%= profile.vacation_per_year %> "
+                  class="w-full my-4 py-2 px-4 rounded border border-gray-300"
+                  type="text"
+                  placeholder="Nome"
+                />
+              </label>
+            </div>
+            <input
+              class="
+                p-4
+                w-full
+                bg-blue-600
+                text-white text-lg
+                font-semibold
+                rounded
+                mt-4
+                cursor-pointer
+                transition
+                lg:hover:bg-blue-500
+              "
+              type="submit"
+              value="Salvar dados"
+            />
+          </div>
         </div>
       </div>
-      <div class="relative -top-36 m-4 lg:-top-24">
-        <h2 class="text-gray-500 text-2xl font-semibold border-b-2 border-gray-300 pb-2 mt-12 mb-6">Planejamento</h2>
-        <div class="xl:-mx-2">
-          <div class="xl:flex">
-            <label class="xl:mx-2" for="">
-              <span>Quanto eu quero ganhar por mês?</span>
-              <input name="monthly-budget" id="monthly-budget" value="<%= profile['monthly-budget'] %> " class="w-full my-4 py-2 px-4 rounded border border-gray-300" type="text" placeholder="Nome">
-            </label>
-            <label class="xl:mx-2" for="">
-              <span>Quantas horas quero trabalhar por dia?</span>
-              <input name="hours-per-day" id="hours-per-day" value="<%= profile['hours-per-day'] %> " class="w-full my-4 py-2 px-4 rounded border border-gray-300" type="text" placeholder="Nome">
-            </label>
-          </div>
-          <div class="xl:flex">
-            <label class="xl:mx-2" for="">
-              <span>Quantos dias quero trabalhar por semana?</span>
-              <input name="days-per-week" id="days-per-week" value="<%= profile['days-per-week'] %> " class="w-full my-4 py-2 px-4 rounded border border-gray-300" type="text" placeholder="Nome">
-            </label>
-            <label class="xl:mx-2" for="">
-              <span>Quantas semanas por ano quero tirar férias?</span>
-              <input name="vacation-per-year" id="vacation-per-year" value="<%= profile['vacation-per-year' ] %> " class="w-full my-4 py-2 px-4 rounded border border-gray-300" type="text" placeholder="Nome">
-            </label>
-          </div>
-          <input class="p-4 w-full bg-blue-600 text-white text-lg font-semibold rounded mt-4 cursor-pointer transition lg:hover:bg-blue-500" type="submit" value="Salvar dados">
-        </div>
-      </div>
     </div>
-  </div>
-
-</body>
-<script src="src/scripts/toggle.js"></script>
+  </body>
+  <script src="src/scripts/toggle.js"></script>
 </html>

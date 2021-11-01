@@ -47,7 +47,7 @@
   </div>
   <section class="relative -top-32">
     <div class="container mx-auto max-w-5xl">
-      <% project.forEach(element => { %>
+      <% updatedJobs.forEach(element => { %>
         <div class="bg-white m-2 px-2 py-4 rounded border border-gray-300 shadow lg:flex lg:justify-between" data-id="<%= element.id %>">
         <div class="flex justify-between">
           <div class="flex items-center">
@@ -55,8 +55,8 @@
             <h2 class="text-gray-700 text-md font-semibold lg:mr-4"><%= element.project_name %></h2>
           </div>
           <div class="flex items-center">
-            <div class="flex items-center px-2 bg-green-300 text-green-600 text-xs font-bold rounded-full lg:px-4 lg:py-2 lg:text-sm">
-              Em andamento
+            <div class="<%= element.status === "progress" ? "bg-green-300 text-green-700" : "bg-yellow-100 text-yellow-600" %> flex items-center px-2 text-xs font-bold rounded-full lg:px-4 lg:py-2 lg:text-sm">
+              <%= element.status === 'done' ? "Encerrado" : 'Em andamento'  %>
             </div>
           </div>
           
@@ -72,15 +72,20 @@
           <div class="flex justify-between p-4 pb-0 lg:p-4">
             <div class="lg:flex items-center lg:mr-4">
               <span class="uppercase text-xs text-gray-400 leading-3 lg:mr-2">Valor</span>
-              <p class="text-gray-700 font-medium">R$ 4500,00</p>
+              <p class="text-gray-700 font-medium">R$ <%= element.budget.toFixed(2).replace('.',',') %> </p>
             </div>
             <div class="lg:flex items-center lg:mr-4">
               <span class="uppercase text-xs text-gray-400 leading-3 lg:mr-2">Prazo</span>
-              <p class="text-gray-700 font-medium">3 dias para a entrega</p>
+              <% if(element.status === 'progress') {%> 
+                <p class="text-gray-700 font-medium"><%= element.remainingDays%> dias para a entrega</p>
+              <% } else { %> 
+                <p class="text-gray-700 font-medium">Prazo encerrado</p>
+
+              <% } %> 
             </div>
           </div>
           <div class="action p-4 pb-0 flex lg:p-4">
-            <a href="#" class="edit border border-gray-300 flex items-center justify-center p-2 rounded mx-3 w-1/2 shadow transition lg:w-auto lg:hover:bg-gray-100 lg:hover:shadow-lg">
+            <a href="/project/<%= element.id %> " class="edit border border-gray-300 flex items-center justify-center p-2 rounded mx-3 w-1/2 shadow transition lg:w-auto lg:hover:bg-gray-100 lg:hover:shadow-lg">
               <img class="mr-2" src="/img/edit.svg" alt="edit">
               <span class="text-gray-600 font-semibold">Edit</span>
             </a href="#">

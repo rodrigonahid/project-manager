@@ -3,70 +3,130 @@ const routes = express.Router();
 
 const views = __dirname + "/views/";
 
-const profile = {
-  name: "Rodrigo Nahid",
-  avatar: "https://github.com/rodrigonahid.png",
-  "monthly-budget": 3000,
-  "days-per-week": 5,
-  "hours-per-day": 6,
-  "vacation-per-year": 4,
+const Profile = {
+  data: {
+    name: "Rodrigo Nahid",
+    avatar: "https://github.com/rodrigonahid.png",
+    monthly_budget: 3000,
+    days_per_week: 5,
+    hours_per_day: 6,
+    vacation_per_year: 4,
+  },
+  controllers: {
+    index(req, res) {
+      res.render(views + "profile", { profile: Profile.data });
+    },
+    update() {
+      const data = req.body;
+      const weeksPerYear = 52;
+      const weeksPerMonth = (weeksPerYear - data["vacation-per-year"]) / 12;
+      const weekTotalHours = data["hours-per-day"] * data["days-per-week"];
+
+      const monthlyTotalHours = weekTotalHours * weeksPerMonth;
+
+      data["value-hour"] = data["monthly-budget"] / monthlyTotalHours;
+
+      Profile.data = {
+        ...Profile.data,
+        ...req.body,
+        value_hour: valueHour,
+      };
+
+      return res.redirect("/profile");
+    },
+  },
 };
 
-const project = [
-  {
-    id: 1,
-    project_name: "Pizzaria Guloso",
-    daily_hours: "2",
-    total_hours: "60",
-    created_at: Date.now(),
-    budget: 4500,
-    remaining: 3,
-    status: "progress",
+const Job = {
+  data: [
+    {
+      id: 1,
+      project_name: "Pizzaria Guloso",
+      daily_hours: "14",
+      total_hours: "12",
+      created_at: Date.now(),
+      budget: 4500,
+      remaining: 3,
+      status: "progress",
+    },
+    {
+      id: 2,
+      project_name: "Projeto UmDois",
+      daily_hours: "6",
+      total_hours: "80",
+      created_at: Date.now(),
+      budget: 4500,
+      remaining: 3,
+      status: "done",
+    },
+  ],
+  controllers: {
+    index(req, res) {
+      // Ajustes no projeto
+      const updatedJobs = Job.data.map((job) => {
+        job.remainingDays = Job.services.remainingDays(job);
+        job.status = job.remainingDays <= 0 ? "done" : "progress";
+        return job;
+      });
+
+      return res.render(views + "index", { updatedJobs });
+    },
+    create(req, res) {
+      return res.render(views + "project");
+    },
+    save(req, res) {
+      const job = req.body;
+      const lastId = Job.data[Job.data.length - 1]?.id || 1;
+      Job.data.created_at = Date.now();
+      Job.data.push({
+        id: lastId + 1,
+        project_name: job["project-name"],
+        daily_hours: job["daily-hours"],
+        total_hours: job["project-valuation"],
+        created_at: Date.now(),
+        budget: 100,
+      });
+      return res.redirect("/");
+    },
+    update() {},
+    show(req, res) {
+      const jobId = req.params.id;
+      console.log(jobId);
+      const job = Job.data.find((job) => Number(job.id) === Number(jobId));
+
+      if (!job) {
+        return res.send("Project not found");
+      }
+
+      return res.render(views + "project-edit", { job });
+    },
   },
-  {
-    id: 2,
-    project_name: "Projeto UmDois",
-    daily_hours: "6",
-    total_hours: "80",
-    created_at: Date.now(),
-    budget: 4500,
-    remaining: 3,
-    status: "done",
+  services: {
+    remainingDays(job) {
+      const remainingDays = (job.total_hours / job.daily_hours).toFixed();
+      const createdDate = new Date(job.created_at);
+
+      const deadline = createdDate.getDate() + Number(remainingDays);
+
+      const deadlineTime = createdDate.setDate(deadline);
+
+      const timeDiffInMs = deadlineTime - Date.now();
+      // Transformar ms em days
+      const dayInMs = 1000 * 60 * 60 * 24;
+      const dayDiff = Math.floor(timeDiffInMs / dayInMs);
+      return dayDiff;
+    },
   },
-];
+};
 
-routes.get("/", (req, res) => {
-  // Ajustes no projeto
-  const updatedJobs = project.map((job) => {
-    const remainingDays = (job.total_hours / job.daily_hours).toFixed();
-    job.remainingDays = remainingDays;
-    console.log(job);
-    return job;
-  });
+routes.get("/", Job.controllers.index);
 
-  return res.render(views + "index", { project });
-});
+routes.get("/project", Job.controllers.create);
 
-routes.get("/project", (req, res) => res.render(views + "project"));
-routes.post("/project", (req, res) => {
-  const job = req.body;
-  const lastId = project[project.length - 1]?.id || 1;
-  project.created_at = Date.now();
-  console.log(job);
-  project.push({
-    id: lastId + 1,
-    project_name: job["project-name"],
-    daily_hours: job["daily-hours"],
-    total_hours: job["project-valuation"],
-    created_at: Date.now(),
-  });
-  return res.redirect("/");
-});
+routes.post("/project", Job.controllers.save);
 
-routes.get("/project/edit", (req, res) => res.render(views + "project"));
+routes.get("/project/:id", Job.controllers.show);
 
-routes.get("/profile", (req, res) =>
-  res.render(views + "profile", { profile: profile })
-);
+routes.get("/profile", Profile.controllers.index);
 
 module.exports = routes;
