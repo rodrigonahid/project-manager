@@ -11,6 +11,7 @@ const Profile = {
     days_per_week: 5,
     hours_per_day: 6,
     vacation_per_year: 4,
+    value_hour: 60,
   },
   controllers: {
     index(req, res) {
@@ -64,10 +65,14 @@ const Job = {
     index(req, res) {
       // Ajustes no projeto
       const updatedJobs = Job.data.map((job) => {
-        job.remainingDays = Job.services.remainingDays(job);
-        job.status = job.remainingDays <= 0 ? "done" : "progress";
-        job.budget = Job.services.calculateBudget(job, Profile.data.value_hour);
-        return job;
+        const remainingDays = Job.services.remainingDays(job);
+        const status = job.remainingDays <= 0 ? "done" : "progress";
+        return {
+          ...job,
+          remainingDays,
+          status,
+          budget: Job.services.calculateBudget(job, Profile.data.value_hour),
+        };
       });
 
       return res.render(views + "index", { updatedJobs });
@@ -89,30 +94,29 @@ const Job = {
       });
       return res.redirect("/");
     },
-    update() {},
     show(req, res) {
       const jobId = req.params.id;
-      console.log(jobId);
       const job = Job.data.find((job) => Number(job.id) === Number(jobId));
 
       if (!job) {
         return res.send("Project not found");
       }
       job.budget = Job.services.calculateBudget(job, Profile.data.value_hour);
+
       return res.render(views + "project-edit", { job });
     },
     update(req, res) {
       const jobId = req.params.id;
-
       const job = Job.data.find((job) => Number(job.id) === Number(jobId));
 
       if (!job) {
         return res.send("Project not found");
       }
+
       const updatedJob = {
         ...job,
-        name: req.body.project_name,
-        total_hours: req.body["total-hours"],
+        project_name: req.body["project-name"],
+        total_hours: req.body["project-valuation"],
         daily_hours: req.body["daily-hours"],
       };
 
@@ -120,10 +124,9 @@ const Job = {
         if (Number(job.id) === Number(jobId)) {
           job = updatedJob;
         }
-
         return job;
       });
-      res.redirect("/job/" + jobId);
+      res.redirect("/project/" + jobId);
     },
   },
   services: {
@@ -142,7 +145,7 @@ const Job = {
       return dayDiff;
     },
     calculateBudget(job, valueHour) {
-      valueHour * job.total_hours;
+      return valueHour * job.total_hours;
     },
   },
 };
@@ -154,6 +157,8 @@ routes.get("/project", Job.controllers.create);
 routes.post("/project", Job.controllers.save);
 
 routes.get("/project/:id", Job.controllers.show);
+
+routes.post("/project/:id", Job.controllers.update);
 
 routes.get("/profile", Profile.controllers.index);
 
