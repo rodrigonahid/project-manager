@@ -76,7 +76,7 @@
             shadow-lg
           "
         >
-          <img class="w-52" src="/img/cash-gray.svg" alt="cash" />
+          <img class="w-52" src="/img/cash.svg" alt="cash" />
           <h2
             class="
               text-gray-800 text-center text-2xl
@@ -109,16 +109,23 @@
             >
               Salvar
             </button>
-            <a
+            <button
+              form="delete-job"
+              type="submit"
               href="#"
               class="p-5 bg-gray-200 rounded mx-2 hover:bg-gray-100 transition"
             >
               <img src="/img/trash.svg" alt="delete" />
-            </a>
+            </button>
           </div>
         </div>
       </div>
     </form>
+    <form
+      method="post"
+      action="/project/delete/<%= job.id %> "
+      id="delete-job"
+    ></form>
   </body>
   <script src="src/scripts/toggle.js"></script>
 </html>
