@@ -1,14 +1,14 @@
 const Job = require("../model/Job");
 const profile = require("../model/Profile");
-const JobUtils = require("../utils/jobUtils");
+const JobUtils = require("../utils/JobUtils");
 
 module.exports = {
   index(req, res) {
     // Ajustes no projeto
-    const Jobs = Job.get();
+    const jobs = Job.get();
     const Profile = profile.get();
 
-    const updatedJobs = Jobs.map((job) => {
+    const updatedJobs = jobs.map((job) => {
       const remainingDays = JobUtils.remainingDays(job);
       const status = job.remainingDays <= 0 ? "done" : "progress";
       return {
@@ -25,12 +25,12 @@ module.exports = {
     return res.render("project");
   },
   save(req, res) {
-    const Jobs = Job.get();
+    const jobs = Job.get();
 
     const job = req.body;
-    const lastId = Jobs[Jobs.length - 1]?.id || 1;
-    Jobs.created_at = Date.now();
-    Jobs.push({
+    const lastId = jobs[jobs.length - 1]?.id || 1;
+    jobs.created_at = Date.now();
+    jobs.push({
       id: lastId + 1,
       project_name: job["project-name"],
       daily_hours: job["daily-hours"],
@@ -41,19 +41,23 @@ module.exports = {
     return res.redirect("/");
   },
   show(req, res) {
+    const jobs = Job.get();
     const jobId = req.params.id;
-    const job = Jobs.find((job) => Number(job.id) === Number(jobId));
+    const job = jobs.find((job) => Number(job.id) === Number(jobId));
 
     if (!job) {
       return res.send("Project not found");
     }
-    job.budget = JobUtils.calculateBudget(job, Profile.data.value_hour);
+    const profile = Profile.get();
+
+    job.budget = JobUtils.calculateBudget(job, profile.value_hour);
 
     return res.render("project-edit", { job });
   },
   update(req, res) {
     const jobId = req.params.id;
-    const job = Jobs.find((job) => Number(job.id) === Number(jobId));
+    const jobs = Job.get();
+    const job = jobs.find((job) => Number(job.id) === Number(jobId));
 
     if (!job) {
       return res.send("Project not found");
@@ -66,18 +70,20 @@ module.exports = {
       daily_hours: req.body["daily-hours"],
     };
 
-    Jobs = Jobs.map((job) => {
+    const newJobs = jobs.map((job) => {
       if (Number(job.id) === Number(jobId)) {
         job = updatedJob;
       }
       return job;
     });
+
+    Job.update(newJobs);
+
     res.redirect("/project/" + jobId);
   },
   delete(req, res) {
     const jobId = req.params.id;
-    console.log(req.param.id);
-    Jobs = Jobs.filter((job) => Number(job.id) !== Number(jobId));
+    Job.delete(jobId);
 
     return res.redirect("/");
   },
