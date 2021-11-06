@@ -3,7 +3,7 @@ let data = {
   avatar: "https://github.com/rodrigonahid.png",
   monthly_budget: 3000,
   days_per_week: 5,
-  hours_per_day: 6,
+  hours_per_day: 12,
   vacation_per_year: 4,
   value_hour: 60,
 };

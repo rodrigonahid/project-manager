@@ -7,7 +7,7 @@
   <title>Projects Management</title>
   <link rel="stylesheet" href="/styles/tailwind.css">
 </head>
-<body class="bg-gray-200">
+<body class="bg-gray-100">
   <header class="relative bg-blue-500 shadow p-4">
     <div class="container mx-auto max-w-5xl flex justify-between">
       <a href="/" class="flex items-center">
@@ -16,11 +16,11 @@
       </a>
       <div class="flex items-center">
         <div class="mr-2 text-right">
-          <p class="text-white font-bold">Rodrigo Nahid</p>
-          <a class="text-gray-400 hover:text-gray-500" href="/profile">Ver perfil</a>
+          <p class="text-white font-bold"> <%= profile.name %> </p>
+          <a class="text-gray-300 hover:text-gray-500" href="/profile">Ver perfil</a>
         </div>
         <a href="/profile">
-          <img class="rounded-full border-pink-600 border-2" src="https://avatars.githubusercontent.com/u/69832627?v=4" alt="profile" width="60">
+          <img class="rounded-full border-pink-600 border-2" src="<%= profile.avatar %> " alt="profile" width="60">
         </a>
       </div>
     </div>
@@ -29,14 +29,19 @@
     <div class="bg-blue-400 p-4">
       <div class="container mx-auto max-w-5xl flex justify-center">
         <img src="/img/alert.svg">
-        <span class="text-white font-semibold ml-2">Você tem 2 horas livres hoje!</span>
+        <span class="text-white font-semibold ml-2"><% if(freeHours >= 0){ %>
+            Você tem <%= freeHours %>  horas livres hoje!
+          <% } else { %>
+            Você não tem horas livres
+          <% } %>  
+        </span>
       </div>
     </div>
     <div class="bg-blue-400 px-4">
       <div class="container mx-auto max-w-5xl flex justify-between items-center md:justify-around">
-        <p class="text-white font-bold">12 <span class="block text-gray-300 font-normal md:inline md:ml-2">Projetos</span></p>
-        <p class="text-white font-bold">7 <span class="block text-gray-300 font-normal md:inline md:ml-2">Em andamento</span></p>
-        <p class="text-white font-bold">12 <span class="block text-gray-300 font-normal md:inline md:ml-2">Encerrados</span></p>
+        <p class="text-white font-bold"><%= statusCount.total %><span class="block text-gray-300 font-normal md:inline md:ml-2">Projetos</span></p>
+        <p class="text-white font-bold"><%= statusCount.progress %><span class="block text-gray-300 font-normal md:inline md:ml-2">Em andamento</span></p>
+        <p class="text-white font-bold"><%= statusCount.done %><span class="block text-gray-300 font-normal md:inline md:ml-2">Encerrados</span></p>
         <a href="/project" class="fixed z-50 bottom-5 right-5 bg-pink-500 p-4 rounded-full shadow-lg lg:static lg:rounded-md lg:flex lg:items-center transition lg:hover:bg-pink-400">
           <img src="/img/plus.svg" alt="plus">
           <span class="hidden text-lg text-white ml-2 lg:block">Adicionar novo projeto</span>
@@ -47,7 +52,7 @@
   </div>
   <section class="relative -top-32">
     <div class="container mx-auto max-w-5xl">
-      <% updatedJobs.forEach(element => { %>
+      <% jobs.forEach(element => { %>
         <div class="bg-white m-2 px-2 py-4 rounded border border-gray-300 shadow lg:flex lg:justify-between" data-id="<%= element.id %>">
         <div class="flex justify-between">
           <div class="flex items-center">

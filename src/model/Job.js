@@ -6,8 +6,7 @@ data = [
     total_hours: "12",
     created_at: Date.now(),
     budget: 4500,
-    remaining: 3,
-    status: "progress",
+    status: "done",
   },
   {
     id: 2,
@@ -16,13 +15,15 @@ data = [
     total_hours: "80",
     created_at: Date.now(),
     budget: 4500,
-    remaining: 3,
-    status: "done",
+    status: "progress",
   },
 ];
 module.exports = {
   get() {
     return data;
+  },
+  update(newData) {
+    data = newData;
   },
   delete(id) {
     data = data.filter((job) => Number(job.id) !== Number(id));

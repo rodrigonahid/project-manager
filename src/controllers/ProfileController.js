@@ -5,7 +5,7 @@ module.exports = {
     res.render("profile", { profile: Profile.get() });
   },
   update(req, res) {
-    console.log(req.body);
+    const profile = Profile.get();
     const data = {
       name: req.body.name,
       avatar: req.body.avatar,
@@ -15,19 +15,19 @@ module.exports = {
       vacation_per_year: req.body["vacation-per-year"],
     };
     const weeksPerYear = 52;
-    const weeksPerMonth = (weeksPerYear - data["vacation-per-year"]) / 12;
-    const weekTotalHours = data["hours-per-day"] * data["days-per-week"];
+    const weeksPerMonth = (weeksPerYear - data.vacation_per_year) / 12;
+    const weekTotalHours = data.hours_per_day * data.days_per_week;
 
     const monthlyTotalHours = weekTotalHours * weeksPerMonth;
 
-    const valueHour = data["monthly-budget"] / monthlyTotalHours;
+    const valueHour = data.monthly_budget / monthlyTotalHours;
 
-    Profile.update({
-      ...Profile.get(),
+    const newProfile = {
+      ...profile,
       ...data,
       value_hour: valueHour,
-    });
-
-    return res.redirect("/profile");
+    };
+    Profile.update(newProfile);
+    return res.redirect("/");
   },
 };

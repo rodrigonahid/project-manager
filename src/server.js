@@ -13,6 +13,4 @@ server.use(express.urlencoded({ extended: true }));
 
 server.use(routes);
 
-server.listen(3000, () => {
-  console.log("rodando");
-});
+server.listen(3000);
