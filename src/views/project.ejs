@@ -7,7 +7,7 @@
     <title>Project Manager</title>
     <link rel="stylesheet" href="/styles/style.css" />
   </head>
-  <body class="bg-gray-200">
+  <body class="bg-gray-100">
     <%- include('components/header', {title: "Projeto"}) %>
 
     <form id="project-form" method="post">
@@ -42,7 +42,7 @@
                 id="daily-hours"
                 name="daily-hours"
                 class="w-full my-4 py-2 px-4 rounded border border-gray-300"
-                type="text"
+                type="number"
               />
             </label>
             <label class="xl:mx-2 inline-block w-2/5" for="">
@@ -51,7 +51,7 @@
                 id="project-valuation"
                 name="project-valuation"
                 class="w-full my-4 py-2 px-4 rounded border border-gray-300"
-                type="text"
+                type="number"
               />
             </label>
           </div>

@@ -1,11 +1,13 @@
 const Profile = require("../model/Profile");
 
 module.exports = {
-  index(req, res) {
-    res.render("profile", { profile: Profile.get() });
+  async index(req, res) {
+    const profile = await Profile.get();
+
+    res.render("profile", { profile: profile });
   },
-  update(req, res) {
-    const profile = Profile.get();
+  async update(req, res) {
+    const profile = await Profile.get();
     const data = {
       name: req.body.name,
       avatar: req.body.avatar,
@@ -27,7 +29,7 @@ module.exports = {
       ...data,
       value_hour: valueHour,
     };
-    Profile.update(newProfile);
+    await Profile.update(newProfile);
     return res.redirect("/");
   },
 };

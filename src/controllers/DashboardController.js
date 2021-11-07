@@ -4,10 +4,10 @@ const JobUtils = require("../utils/JobUtils");
 const JobController = require("./JobController");
 
 module.exports = {
-  index(req, res) {
+  async index(req, res) {
     // Ajustes no projeto
-    const jobs = Job.get();
-    const profile = Profile.get();
+    const jobs = await Job.get();
+    const profile = await Profile.get();
     let statusCount = {
       progress: 0,
       done: 0,
